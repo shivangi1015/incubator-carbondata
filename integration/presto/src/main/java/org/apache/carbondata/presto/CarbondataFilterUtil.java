@@ -217,7 +217,7 @@ public class CarbondataFilterUtil {
       c.setTime(new Date(0));
       c.add(Calendar.DAY_OF_YEAR, ((Long)rawdata).intValue());
       Date date = c.getTime();
-      return date.getTime();
+      return date.getTime() * 1000;
     }
 
     return rawdata;

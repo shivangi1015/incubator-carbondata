@@ -133,7 +133,7 @@ class CarbondataPageSource implements ConnectorPageSource {
             return null;
           }
         }
-        if(columnData.size() != types.size()){
+        if(columnData.size() != types.size() && types.size() != 0){
           close();
           return null;
         }
@@ -142,7 +142,7 @@ class CarbondataPageSource implements ConnectorPageSource {
         return null;
       }
 
-      Block[] blocks = new Block[columnData.size()];
+      Block[] blocks = new Block[types.size()];
       for (int column = 0; column < blocks.length; column++) {
         Type type = types.get(column);
         readers[column].setStreamData(columnData.get(column));
