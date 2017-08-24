@@ -62,6 +62,9 @@ public class CarbondataConnectorFactory implements ConnectorFactory {
       Bootstrap app = new Bootstrap(new JsonModule(),
           new CarbondataModule(connectorId, context.getTypeManager()));
 
+      System.out.println("app: " + app);
+      System.out.println("getTypeManager: " + context.getTypeManager());
+      System.out.println("injector: " + app.initialize());
       Injector injector =
           app.strictConfig().doNotInitializeLogging().setRequiredConfigurationProperties(config)
               .initialize();
@@ -73,6 +76,7 @@ public class CarbondataConnectorFactory implements ConnectorFactory {
           injector.getInstance(ConnectorRecordSetProvider.class);
       ConnectorPageSourceProvider connectorPageSource = injector.getInstance(ConnectorPageSourceProvider.class);
 
+      System.out.println("lifeCycleManager: " + lifeCycleManager + "\n" + "metadata: " + metadata +"\n"+"splitManager: " + splitManager);
       return new CarbondataConnector(lifeCycleManager, metadata,
           new ClassLoaderSafeConnectorSplitManager(splitManager, classLoader), connectorRecordSet,
           classLoader,
